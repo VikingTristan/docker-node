@@ -1,7 +1,17 @@
 version: "3.9"
 services: 
-  web:
-    build: .
+  app1:
+    build: ./app1
     ports: 
       - 3000:3000
-    # command: npm run dev
+    volumes:
+      - sharedvolume:/usr/src/app:ro
+  app2:
+    build: ./app2
+    ports: 
+      - 3001:3000
+    volumes_from: 
+      - app1
+
+volumes: 
+  sharedvolume:

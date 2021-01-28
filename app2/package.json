@@ -1,0 +1,10 @@
+{
+  "name": "app2",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Thomas Lorntzen",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  } 
+}

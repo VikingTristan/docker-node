@@ -1,13 +1,14 @@
 {
-  "name": "docker_web_app",
+  "name": "app1",
   "version": "1.0.0",
   "description": "Node.js on Docker",
   "author": "Thomas Lorntzen",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.16.1"
+    "express": "^4.16.1",
+    "nodemon": "^2.0.7"
   }
 }
