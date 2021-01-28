@@ -12,6 +12,12 @@
 
 - Scenario 3: If project A installs dependencies, and project B requires the same dependencies, can project B use project A's dependencies?
 
+- Scenario 4: Hot module reloading for frontend devs. Since all the packages will be on the container, and we're running libraries such as webpack from the container, will the libraries notice changes in code on the host and reload the app?
+
 
 #### There are several approaches on how to deal with node_modules and docker.
 - https://burnedikt.com/dockerized-node-development-and-mounting-node-volumes/
+- https://rangle.io/blog/docker-for-frontend-devs-custom-docker-images-for-development/
+- https://stackoverflow.com/questions/51097652/install-node-modules-inside-docker-container-and-synchronize-them-with-host
+- https://petemill.com/writing/docker-compose-node-development/
+- https://www.docker.com/blog/keep-nodejs-rockin-in-docker/
