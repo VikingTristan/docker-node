@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>Socket 1</title>
+</head>
+
+<body>
+    <p>Lmao hello I am app1</p>
+    <div id="app"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        var app = document.getElementById("app");
+
+        socket.on("connections", connections => {
+            let test = document.createElement("p");
+            test.textContent = `Hello from server, there are ${connections} people connected`;
+
+            app.appendChild(test);
+        })
+    </script>
+</body>
+
+</html>
