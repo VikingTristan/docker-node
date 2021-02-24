@@ -11,6 +11,11 @@ To allow for autocompletes, eslint, etc during development.
 
 This will fire up MongoDB, Mongo Express, a simple node app with some sockets and database connection, and one hello world node app.
 
+## Docker stack
+To run the entire stack as a... stack within a orchestrator such as Docker Swarm.
+
+- `docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml vikingtomrulez`
+
 ### Questions to myself while testing node_modules and docker
 - Question 1: If all dependencies are installed within the containers themselves. As a host of the containers and as developer with an IDE, how do I get autocomplete when none of the dependencies are on the host?
   - Conclusion: We need to synchronize host machine repo, with the container's directory through Docker volumes. Not recommended. Just install packages on host instead.
@@ -29,8 +34,8 @@ This will fire up MongoDB, Mongo Express, a simple node app with some sockets an
 
 #### Troubleshooting
 - Nodemon doesn't detect changes on host. 
- - Make sure host mounts source code into container.
- - `nodemon -L` worked for me. This will enable legacy chokidar snacks.
+  - Make sure host mounts source code into container.
+  - `nodemon -L` worked for me. This will enable legacy chokidar snacks.
 
 ##### There are several approaches on how to deal with node_modules and docker.
 - https://burnedikt.com/dockerized-node-development-and-mounting-node-volumes/
