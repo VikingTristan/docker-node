@@ -9,7 +9,7 @@ const HOST = process.env.HOST || '0.0.0.0';
 // App
 const app = express();
 app.get('/', (req, res) => {
-  res.send('Hello I am app 2');
+  res.send('Hello, this app only exists to show an example of multiple apps in a docker stack.');
 });
 
 app.listen(PORT, HOST);

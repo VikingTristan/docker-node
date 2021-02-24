@@ -2,46 +2,61 @@ version: "3.9"
 services:
   mongo:
     image: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=secret
     ports: 
       - 27017:27017
     networks:
-      - mongodb_network
+      - viking-network
     volumes:
       - mongodb_data:/data/db
+    env_file: 
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
   mongo-express:
     depends_on:
       - mongo
     image: mongo-express
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
-      - ME_CONFIG_BASICAUTH_USERNAME=root
-      - ME_CONFIG_BASICAUTH_PASSWORD=secret
     ports:
       - 3002:8081
     networks:
-      - mongodb_network
+      - viking-network
     restart: always
+    env_file:
+      - .env
   app1:
     depends_on:
-      - mongo-express
-    build:
-      context: ./app1
-      dockerfile: Dockerfile
+      - mongo
+    build: ./app1
+    image: app1
     ports: 
       - 3000:3000
-  # app2:
-  #   depends_on:
-  #     - app1
-  #   build: ./app2
-  #   ports: 
-  #     - 3001:3000
+    networks:
+      - viking-network
+    restart: always
+    volumes:
+      - ./app1/:/usr/src/app/code
+      - /usr/src/app/node_modules
+    env_file: 
+      - .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=mongo
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    command: npm start
+  app2:
+    depends_on:
+      - app1
+    build: ./app2
+    image: app2
+    ports: 
+      - 3001:3000
 
-volumes: 
+volumes:
   mongodb_data:
 
 networks:
-  mongodb_network:
+  viking-network:
+    driver: bridge

@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "description": "Node.js on Docker",
   "author": "Thomas Lorntzen",
-  "main": "server.js",
+  "main": "code/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": "14"
+  },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon -L"
   },
   "dependencies": {
     "express": "^4.16.1",
+    "mongodb": "^3.6.4",
     "nodemon": "^2.0.7",
     "socket.io": "^3.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-plugin-node": "^11.1.0"
   }
 }

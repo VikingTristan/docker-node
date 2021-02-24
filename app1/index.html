@@ -1,11 +1,13 @@
 <html>
 
 <head>
-    <title>Socket 1</title>
+    <title>Socketboi</title>
 </head>
 
 <body>
-    <p>Lmao hello I am app1</p>
+    <header>
+        <h1>Socketboi</h1>
+    </header>
     <div id="app"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -15,7 +17,7 @@
 
         socket.on("connections", connections => {
             let test = document.createElement("p");
-            test.textContent = `Hello from server, there are ${connections} people connected`;
+            test.textContent = `Hello, there are ${connections} people connected`;
 
             app.appendChild(test);
         })
