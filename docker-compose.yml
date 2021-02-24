@@ -35,13 +35,16 @@ services:
       - viking-network
     restart: always
     volumes:
-      - ./app1/:/usr/src/app/code
+      # Mount host source code into container
+      - ./app1/:/usr/src/app
+      # The following stops the container from syncing back to host
       - /usr/src/app/node_modules
     env_file: 
       - .env
     environment:
       - MONGO_USERNAME=$MONGO_USERNAME
       - MONGO_PASSWORD=$MONGO_PASSWORD
+      # We just set "mongo" here, this will point to the docker service "mongo" we have earlier in this document.
       - MONGO_HOSTNAME=mongo
       - MONGO_PORT=$MONGO_PORT
       - MONGO_DB=$MONGO_DB
@@ -59,4 +62,3 @@ volumes:
 
 networks:
   viking-network:
-    driver: bridge

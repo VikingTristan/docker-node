@@ -3,7 +3,11 @@
 - Docker
 
 ## Get started
-`docker-compose build && docker-compose up`
+To allow for autocompletes, eslint, etc during development. 
+- `cd app1`
+- `npm ci`
+- `cd ..`
+- `docker-compose build && docker-compose up`
 
 This will fire up MongoDB, Mongo Express, a simple node app with some sockets and database connection, and one hello world node app.
 
@@ -21,9 +25,14 @@ This will fire up MongoDB, Mongo Express, a simple node app with some sockets an
   - Conclusion: Don't run frontend apps through containers during development. It _IS_ possible to watch for changes in the container files, then map it etc, but it is a hassle. Not recommended. Do it the other way around, run packages on host, then mount into container.
 
 - Question 5: In our Dockerfiles: Why separately copy package*.json into the container, install packages, THEN copy the rest of the app?
-  - Conclusion: A Docker image consists of multiple layers. Docker will detect changes in each layer. If we copied and installed everything in one layer, and did a change in our source code, we would have to install all of the node packages for each build. By separating it into different layers, packages will only be installed if there are changes within the that layer.
+  - Conclusion: A Docker image consists of multiple layers. Docker will detect changes in each layer. If we copied and installed everything in one layer, and did a change in our source code, we would have to install all of the node packages for each build. By separating it into different layers, packages will only be installed if there are changes within the layer that has to do with packages.
 
-#### There are several approaches on how to deal with node_modules and docker.
+#### Troubleshooting
+- Nodemon doesn't detect changes on host. 
+ - Make sure host mounts source code into container.
+ - `nodemon -L` worked for me. This will enable legacy chokidar snacks.
+
+##### There are several approaches on how to deal with node_modules and docker.
 - https://burnedikt.com/dockerized-node-development-and-mounting-node-volumes/
 - https://rangle.io/blog/docker-for-frontend-devs-custom-docker-images-for-development/
 - https://stackoverflow.com/questions/51097652/install-node-modules-inside-docker-container-and-synchronize-them-with-host

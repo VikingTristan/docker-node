@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js on Docker",
   "author": "Thomas Lorntzen",
-  "main": "code/server.js",
+  "main": "app.js",
   "type": "commonjs",
   "engines": {
     "node": "14"
